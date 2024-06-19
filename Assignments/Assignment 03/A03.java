@@ -1,12 +1,10 @@
 public class A03 {
     public static void main(String[] args) {
-        // Daily temperatures for June
         int[] june = {
             72, 74, 68, 70, 75, 77, 80, 79, 65, 68,
             72, 74, 76, 78, 70, 72, 75, 77, 74, 76,
             73, 75, 72, 74, 78, 80, 75, 77, 72, 70
         };
-        // Daily temperatures for July
         int[] july = {
             84, 86, 88, 85, 82, 84, 87, 89, 90, 85,
             86, 88, 84, 82, 85, 87, 89, 90, 85, 84,
@@ -25,7 +23,7 @@ public class A03 {
         // Test isPresent
         System.out.println(isPresent(20, july)); // expect false
         System.out.println(isPresent(90, july)); // expect true
-    } // method main
+    } 
 
     /**
      * Counts how many times a specified value appears in a given array.
@@ -36,8 +34,13 @@ public class A03 {
      */
     public static int countOf(int[] array, int target) {
         int count = 0;
+        for (int value : array) {
+            if (value == target) {
+                count++;
+            }
+        }
         return count;
-    } // method countOf
+    }
 
     /**
      * Returns the max value in an array
@@ -46,8 +49,13 @@ public class A03 {
      */
     public static int findMax(int[] array) {
         int max = array[0];
+        for (int i = 1; i < array.length; i++) {
+            if (array[i] > max) {
+                max = array[i];
+            }
+        }
         return max;
-    } // method findMax
+    }
 
     /**
      * Returns the min value in an array
@@ -56,8 +64,13 @@ public class A03 {
      */
     public static int findMin(int[] array) {
         int min = array[0];
+        for (int i = 1; i < array.length; i++) {
+            if (array[i] < min) {
+                min = array[i];
+            }
+        }
         return min;
-    } // method findMin
+    } 
 
     /**
      * Determines if a specified value exists in a give array
@@ -66,9 +79,14 @@ public class A03 {
      * @return true if target value is found in array, false otherwise
      */
     public static boolean isPresent(int target, int[] array) {
+        for (int value : array) {
+            if (value == target) {
+                return true;
+            }
+        }
         boolean found = false;
         return found;
-    } // method contains
+    } 
 
     /**
      * Determines if two arrays have at least one common value.
