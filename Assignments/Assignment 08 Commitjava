@@ -1,0 +1,131 @@
+public class Time {
+
+    /** Hours, minutes, and seconds */
+    private int hours;
+    private int minutes;
+    private int seconds;
+
+    /** Set time to midnight */
+    public Time() {
+        this.hours = 0;
+        this.minutes = 0;
+        this.seconds = 0;
+    }
+
+    public Time(int totalSeconds) {
+        if (totalSeconds < 0) {
+            totalSeconds = 0;
+        } else if (totalSeconds > 86400) {
+            totalSeconds = 86400;
+        }
+        this.hours = totalSeconds / 3600;
+        this.minutes = (totalSeconds % / 3600) / 60;
+        this.seconds = totalSeconds % 60;
+    }
+
+public Time(int hours, int minutes, int seconds) {
+    this.hours = hours % 24;
+    this.minutes = (minutes + (hours < 0 ? -1 : 0) * 60) % 60;
+    this.seconds = (seconds + (minutes < 0 ? -1 : 0) * 60) % 60;
+    if (this.hours < 0) this.hours += 24;
+    if (this.minutes < 0) this.minutes += 60;
+    if (this.seconds < 0) this.seconds += 60;
+}
+
+/** Constructor which includes the ante/post meridiem indicator */
+public Time(int hours, int minutes, int seconds, char meridiem) {
+    if (meridiem == 'P' || meridiem == 'p') {
+        this.hours = (hours % 12) + 12;
+    } else if (meridiem == 'A' || meridiem == 'a') {
+        this.hours = hours % 12;
+    } else {
+        this.hours = hours % 24;
+    }
+    this.minutes = (minutes + (hours < 0 ? -1 : 0) *60) % 60;
+    this.seconds = (seconds + (minutes < 0 ? -1 : 0) * 60) % 60;
+    if (this.hours < 0) this.hours += 24;
+    if (this.minutes < 0) this.minutes += 60;
+    if (this.seconds < 0) this.seconds += 60;
+}
+
+/** Adds seconds to the current time */
+public void add(int secondsToAdd) {
+    int totalSeconds = this.toSeconds() + secondsToAdd;
+    Time newTime = new Time(totalSeconds);
+    this.hours = newTime.hours;
+    this.minutes = newTime.minutes;
+    this.seconds = newTime.seconds
+}
+
+/** Subtracts hours, minutes, and seconds from the time */
+public void subtract(int hours, int minutes, int seconds) {
+    this.hours = (this.hours - hours) % 24;
+    this.minutes = (this.minutes - minutes + (this.hours < 0 ? -1 : 0) * 60) % 60;
+    this.seconds = (this.seconds - seconds + (this.minutes < 0 ? -1 : 0) * 60) % 60;
+    if (this.hours < 0) this.hours += 24;
+    if (this.minutes < 0) this.minutes += 60;
+    if (this.seconds < 0) this.seconds += 60;
+}
+
+/** Multiplies the time by a factor */
+public void multiply(int factor) {
+    int totalSeconds = this.toSeconds() * Math.abs(factor);
+    Time newTime = new Time(totalSeconds);
+    this.hours = newTime.hours;
+    this.minutes = newTime.minutes;
+    this.seconds = newTime.seconds;
+}
+
+/** Divides the time by a divisor */
+public void divide(int divisor) {
+    if (divisor == 0) {
+        throw new IllegalArgumentException("Division by zero");
+    }
+    int totalSeconds = this.toSeconds() / Math.abs(divisor);
+    Time newTime = new Time(totalSeconds);
+    this.hours = newTime.hours;
+    this.minutes = newTime.minutes;
+    this.seconds = newTime.seconds;
+}
+
+public int toSeconds() {
+    return this.hours * 3600 + this.minutes * 60 + this.seconds;
+}
+
+public String toString() {
+    int displayHours = (this.hours == 0 || this.hours == 12) ? 12 : this.hours % 12;
+    String meridiem = (this.hours < 12) ? "AM" : "PM";
+    return String.format("%02d:%02d:%02d (%d:02d %s)",
+            this.hours, this.minutes, this.seconds, displayHours, this.minutes, meridiem);
+}
+
+public static void main(String[] args) {
+    Time t1 = new Time();
+    System.out.println(t1);
+
+    Time t2 = new Time(1261);
+    System.out.println(t2);
+
+    Time t3 = new Time (18, 30, 15);
+    System.out.println(t3);
+
+    Time t4 = new Time(6, 30, 00, 'P');
+    System.out.println(t4);
+
+    Time t5 = new Time(6, 30, 00, 'a');
+    System.out.println(t5);
+
+    Time t6 = new Time(11, 30, 00);
+    t6.add(3000);
+    System.out.println(t6);
+
+    t6.subtract(900);
+    System.out.println(t6);
+
+    t6.multiply(3),
+    System.out.println(t6);
+
+    t6.divide(2);
+    System.out.println(t6);
+    
+} // class time
