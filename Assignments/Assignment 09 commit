@@ -1,0 +1,83 @@
+public class River implements Comparable<River> {
+
+// Values for river
+private static final int DEFAULT_ALTITUDE = 0;
+private static final int DEFAULT_LENGTH = 0;
+private static final String DEFAULT_NAME = "Unknown";
+
+private int altitude;
+private int length;
+private String name;
+
+// Default constructor
+public River() {
+  this.altitude = DEFAULT_ALTITUDE;
+  this.length = DEFAULT_LENGTH;
+  this.name = DEFAULT_NAME;
+}
+
+// Parameterized constructor
+public River(int altitude, int length, String name) {
+  this.altitude = altitude;
+  this.length = length;
+  this.name = name;
+}
+
+// Returns altitude of river
+public int getAltitude() {
+  return altitude;
+}
+
+// Returns length of river
+public int getLength() {
+  return length;
+}
+
+// Returns name of river
+public String getName() {
+  return name;
+}
+
+// Returns string representing the river
+public String toString() {
+  return "River{altitude=" + altitude + " m, length=" + length + "km, name='" + name + "',}";
+}
+
+// Compare lengths of multiple rivers
+public int compareTo(River other) {
+  return Integer.compare(this.length, other.length);
+{
+
+// Compare all values of multiple rivers
+public boolean equals(Object obj) {
+  if (this == obj) return true;
+  if (obj == null || getClass() != obj.getClass()) return false;
+  River other = (River) obj;
+  return this.name.equals(other.name) &&
+    this.altitude == other.altitude &&
+    this.length == other.length;
+}
+
+public int hashCode() {
+  int result = name.hashCode();
+  result = 31 * result + altitude;
+  result = 31 * result + length;
+  return result;
+}
+
+// Method main
+public static void main(String[] args) {
+  River river1 = new River("Amazon", 100, 6400);
+  River river2 = new River("Nile", 50, 6650);
+  River river3 = new River("Amazon", 100, 6400);
+
+  System.out.println("River 1: " + river1);
+  System.out.println("River 2: " + river2);
+
+  System.out.println("Comparing river1 to river2: " + river1.compareTo(river2));
+  System.out.println("Comparing river2 to river1: " + river2.compareTo(river1));
+
+  System.out.println("Is river1 equal to river2? " + river1.equals(river2));
+  System.out.println("Is river1 equal to river3? " + river1.equals(river3));
+  }
+}
