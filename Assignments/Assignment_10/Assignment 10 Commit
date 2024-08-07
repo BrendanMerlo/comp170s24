@@ -1,0 +1,96 @@
+public class FinalAssignment {
+
+// Problem 1 merge 2 arrays
+// Initialize array to hold merged result
+public static int[] merge(int[] left, int[] right) {
+  int leftLength = left.length;
+  int rightLength = right.length;
+  int[] mergedArray = new int[leftLength + rightLength];
+
+  // Index variables for input arrays
+  int leftIndex = 0;
+  int rightIndex = 0;
+  int mergedIndex = 0;
+
+  // Merge arrays 
+  while (leftIndex < leftLength && rightIndex < rightLength) {
+    if (left[leftIndex] <= right[rightIndex]) {
+      mergedArray[mergedIndex++] = left[leftIndex++];
+    } else {
+      mergedArray[mergedIndex++] = right[rightIndex++];
+    }
+  }
+
+  // Copy remaining elements from left array
+  while (leftIndex < leftLength) {
+    mergedArray[mergedIndex++] = left[leftIndex++];
+  }
+
+  // Copy remaining elements from right array
+  while (rightIndex < rightLength) {
+    mergedArray[mergedIndex++] = right[rightIndex++];
+  }
+
+  // return result
+  return mergedArray;
+}
+
+// Problem 2 reverse a string
+public static String reverse(String string) {
+  int length = string.length();
+  char[] reversedChars = new char[length];
+
+  // Fill reverseChars array
+  for (int i = 0; i < length; i++) {
+    reversedChars[i] = string.charAt(length - 1 - i);
+  }
+
+  // return result
+  return new String(reversedChars);
+}
+
+// Problem 3 simple sorting
+public static int[] simpleSort(int[] array) {
+  int length = array.length;
+
+  // Perform selection sort
+  for (int i = 0; i < length - 1; i++) {
+    int minIndex= i;
+
+    // Find the index of the smallest element in the unsorted array
+    for (int j = i + 1; j < length; j++) {
+      if (array[j] < array[minIndex]) {
+        minIndex = j;
+      }
+    }
+
+    //Swap the found minimum element with the first element of the unsorted array
+    if (minIndex !=i) {
+      int temp = array[i];
+      array[i] = array[minIndex];
+      array[minIndex] = temp;
+    }
+  }
+
+  // return result
+  return array;
+}
+
+public static void main(String[] args) {
+  // Problem 1 merge 2 arrays test
+  int[] a = {1, 2, 8, 9};
+  int[] b = {0, 5, 6, 7};
+  int[] c = merge(a, b);
+  System.out.println("Merged array: " + java.util.Arrays.toString(c));
+
+  // Problem 2 reverse a string test
+  String str = "Hello";
+  String reversedStr = reverse(str);
+  System.out.println("Reversed string: " + reversedStr);
+
+  // Problem 3 simple sorting test
+  int[] d = {10, 8, 5, 6, 2};
+  int[] sortedArray = simpleSort(d);
+  System.out.println("Sorted array: " + java.util.Arrays.toString(sortedArray));
+  }
+}
